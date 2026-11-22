@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="تجربة تدريبية للاستجابة لعملية بطاقة غير معروفة">
+<title>مو أنا | تجربة الاستجابة للاحتيال</title>
+<style>
+:root{color-scheme:light;--ink:#102c28;--muted:#4c6661;--line:#dce7e3;--green:#0c4b40;--lime:#d6f881;--paper:#f2f7f4;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.65}button,select,input,textarea{font:inherit}button,select{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #267760;outline-offset:4px}[hidden]{display:none!important}
+.shell{width:min(1080px,calc(100% - 48px));margin:auto}.mast{background:#102f2a;color:white}.mast .shell{display:flex;align-items:center;justify-content:space-between;min-height:72px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.3rem}.mark{display:grid;place-items:center;width:33px;height:33px;border-radius:11px;color:var(--ink);background:var(--lime);font:bold 1.2rem Arial}.bank-toggle{background:transparent}.bank-toggle:hover{background:#1c4b41}.demo-label{font-size:.86rem;color:#dcf0e9;border:1px solid #4b7469;border-radius:50px;padding:4px 13px}
+main{padding-block:32px 48px}.hero{background:#123e35;color:white;border-radius:24px;padding:35px 38px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;inset:-90px auto auto -95px;width:330px;height:330px;border-radius:50%;border:1px solid #6ca89555;box-shadow:0 0 0 30px #6ca89519,0 0 0 62px #6ca89513;pointer-events:none}.hero>div{position:relative;z-index:1}.hero h1{font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.3;margin:0 0 10px}.hero p{color:#d0e5de;margin:0;max-width:570px}.layout{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(245px,1fr);align-items:start;gap:20px;margin-top:22px}.panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:26px}.panel h2{margin:0 0 6px;font-size:1.35rem}.sub{color:var(--muted);margin:0 0 20px}.steps{list-style:none;padding:0;margin:0 0 24px;display:flex;gap:8px}.steps li{flex:1;background:#eef3f0;color:var(--muted);padding:7px;border-radius:8px;text-align:center;font-weight:bold;font-size:.84rem}.steps li[aria-current]{background:#dff0e6;color:var(--green)}.steps li.done{background:#f2f9ed;color:var(--green)}
+.label, label{display:block;font-weight:bold;font-size:.9rem;margin-bottom:5px}select,input,textarea{width:100%;padding:10px 12px;border:1px solid #adc3bb;border-radius:9px;background:white;color:var(--ink)}textarea{min-height:75px;resize:vertical}.notice{background:#f5f9f7;border:1px solid var(--line);border-radius:13px;margin-block:17px;padding:15px 17px}.notice p{margin:0;overflow-wrap:anywhere}.notice .label{color:var(--green);margin-bottom:4px}.controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.btn{border:1px solid transparent;border-radius:10px;padding:10px 15px;font-weight:bold;min-height:45px}.primary{background:var(--lime);color:var(--ink)}.primary:hover{background:#c4ec6b}.secondary{background:white;color:var(--green);border-color:#adc3bb}.secondary:hover{background:#eff7f2}.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.input-grid .full{grid-column:1/-1}.field-error{color:#923721;font-size:.9rem;margin:10px 0 0}.aside-title{border-bottom:1px solid var(--line);padding-bottom:12px}.event-list{list-style:none;padding:0;margin:12px 0 0}.event-list li{padding:8px 13px 8px 0;border-inline-start:3px solid #cfe7d9;margin-block:7px;color:var(--muted);font-size:.92rem}.metric{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);margin-top:16px;padding-top:13px;font-size:.88rem;color:var(--muted)}.metric strong{color:var(--green)}.foot-note{font-size:.87rem;margin:16px 0 0;color:var(--muted)}.result{border-inline-start:4px solid #267760;background:#edf8f0;padding:14px 16px;border-radius:8px}.result strong{display:block}.result p{margin:3px 0 0}[dir=ltr]{text-align:left}
+.trial-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.classification{margin:10px 0 0;font-size:.88rem;color:var(--muted)}.bench{background:#f4f8f5;padding:12px;border:1px solid var(--line);border-radius:12px;margin-top:16px}.bench h3{font-size:1rem;margin:0 0 5px}.bench dl{margin:0}.bench dl div{display:flex;justify-content:space-between;gap:7px;padding-block:5px;align-items:center;font-size:.87rem}.bench dd{margin:0;font-weight:bold}.voice-line{margin:12px 0 0;font-size:1rem}.voice-status{color:var(--muted);font-size:.85rem;margin-top:8px}
+.bank-panel{margin-top:20px}.bank-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}.bank-head .sub{margin-bottom:8px}.bank-case{margin-top:14px;padding:16px;background:#f5f9f7;border:1px solid var(--line);border-radius:13px}.bank-case p{margin:5px 0;overflow-wrap:anywhere}.case-reference{font-weight:bold;letter-spacing:.025em}.tracking{margin-top:16px;padding:12px 14px;border:1px solid var(--line);border-radius:10px}.tracking p{margin:4px 0}.tracking [dir=ltr]{display:inline-block}
+.train-entry{margin-top:18px}.training{margin-top:22px}.training-top{display:flex;justify-content:space-between;align-items:start;gap:12px}.training-top p{margin:0;color:var(--muted);font-size:.9rem}.training-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.training-grid .notice{margin:0}.training-feedback{margin-top:14px;padding:14px 16px;border-radius:10px;background:#eef7ed;border-inline-start:4px solid #267760}.training-feedback h3{margin:0 0 5px;font-size:1rem}.training-feedback p{margin:0}.training-end{margin-top:14px}.training-end .bench{max-width:540px}.training-end h3{margin:0 0 8px}.scenario-title{font-size:1.1rem;margin:13px 0}.train-question{margin:15px 0 0;font-weight:bold}.train-controls{margin-top:10px}.train-controls button:disabled{cursor:default;opacity:.7}.training [aria-pressed=true]{border-color:var(--green);background:#dff0e6;color:var(--ink);opacity:1!important}
+@media(max-width:560px){.training-grid{grid-template-columns:1fr}}
+@media(max-width:490px){.trial-grid{grid-template-columns:1fr}}
+@media(max-width:740px){.layout{grid-template-columns:1fr}.shell{width:calc(100% - 28px)}main{padding-top:16px}.hero{padding:25px 20px}.panel{padding:19px}.steps li{font-size:.78rem}}
+@media(max-width:375px){.input-grid{grid-template-columns:1fr}.controls .btn{width:100%}}
+.awareness{margin-top:22px}.aw-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:start;gap:10px}.aw-tools{display:grid;grid-template-columns:2fr 1fr;gap:12px}.aw-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.aw-card{width:100%;text-align:start;border:1px solid var(--line);border-radius:12px;background:#f6faf7;padding:12px 14px;color:var(--ink)}.aw-card:hover,.aw-card[aria-pressed=true]{border-color:#438373;background:#e5f4eb}.aw-card strong,.aw-card small{display:block}.aw-card small{color:var(--muted);font-size:.82rem}.aw-card strong{font-size:1rem}.aw-count{font-size:.9rem;color:var(--muted);margin:13px 0 6px}.aw-detail{background:#f4f8f5;border:1px solid var(--line);border-radius:15px;margin:13px 0 20px;padding:17px}.aw-detail h3{margin:0 0 5px}.aw-detail ul{margin-top:4px}.aw-section{margin-top:12px}.aw-alert{background:#fff4dc;border:1px solid #dfbd78;color:#503715;border-radius:10px;padding:12px;margin-top:12px}.aw-alert p{margin:2px 0}.aw-source{display:inline-block;color:var(--green);margin-top:12px}.hero .secondary{background:transparent;color:#e9fcf5;border-color:#7eaea0}.hero .secondary:hover{background:#1c5548}.aw-head .sub{margin-bottom:8px}
+@media(max-width:560px){.aw-tools,.aw-grid{grid-template-columns:1fr}}
+.scan-panel{margin-top:22px}.scan-panel textarea{min-height:90px}.scan-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.scan-span{grid-column:1/-1}.scan-result{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}.scan-result h3{margin:0 0 6px}.scan-signal{padding:10px 12px;margin-top:8px;border-radius:9px;background:#f1f7f3;overflow-wrap:anywhere}.scan-signal p{margin:3px 0}.scan-signal q{font-weight:bold}.scan-help{font-size:.88rem;color:var(--muted);margin:4px 0 13px}
+@media(max-width:560px){.scan-form-grid{grid-template-columns:1fr}}
+.story-panel{margin-top:22px}.story-panel textarea{min-height:140px}.story-result{border-top:1px solid var(--line);margin-top:19px;padding-top:14px}.story-result h3{margin:0 0 7px}.story-list{list-style:none;padding:0;margin:14px 0}.story-list li{padding:10px 14px;margin-block:7px;border:1px solid var(--line);border-inline-start:3px solid #9db4ab;border-radius:9px;background:#f5f9f7}.story-list li[data-priority=true]{border-color:#cd9b51;background:#fff5df}.story-list p{margin:3px 0;overflow-wrap:anywhere}.story-list q{font-weight:bold}.story-list small{display:block;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="mast"><div class="shell"><div class="brand"><span class="mark" aria-hidden="true">!</span> مو أنا</div><button type="button" class="demo-label bank-toggle" id="bank-toggle" aria-expanded="false" aria-controls="bank-panel">لوحة البنك التجريبي</button></div></header>
+<main class="shell">
+<section class="hero"><div><h1>عملية ما تتعرّف عليها؟</h1><p>جرّب كيف تراجع إشعار الخصم وتجهّز البلاغ وتختار الإجراء المناسب.</p><div class="controls train-entry"><button type="button" class="btn primary" id="train-open" aria-expanded="false" aria-controls="training">جرّب «قبل ما توافق»</button><button type="button" class="btn secondary" id="aw-open" aria-controls="awareness" aria-expanded="false">التنبيهات والتوعية</button><button type="button" class="btn secondary" id="scan-open" aria-controls="scanner" aria-expanded="false">افحص الرسالة</button><button type="button" class="btn secondary" id="story-open" aria-controls="story" aria-expanded="false">كيف بدأت الخدعة؟</button></div></div></section>
+<section class="panel training" id="training" aria-labelledby="training-title" hidden>
+<div class="training-top"><div><h2 id="training-title" tabindex="-1">قبل ما توافق</h2><p id="train-phase"></p></div><button type="button" class="btn secondary" id="train-close">إغلاق</button></div>
+<div id="train-question-box">
+<h3 class="scenario-title" id="train-title" tabindex="-1"></h3>
+<div class="training-grid">
+<div class="notice"><span class="label" id="train-context-label">اللي يقوله المتصل</span><p id="train-caller"></p></div>
+<div class="notice"><span class="label">الإشعار اللي وصلك</span><p id="train-notice"></p></div>
+</div>
+<p class="train-question">وش تسوي؟</p>
+<div class="controls train-controls" aria-label="خيارات التصرف">
+<button type="button" class="btn secondary" id="train-approve">أراجع التفاصيل في التطبيق اللي بدأت منه</button>
+<button type="button" class="btn secondary" id="train-ask">أطلب توضيح من المتصل وأبقى معه</button>
+<button type="button" class="btn secondary" id="train-decline">أرفض الطلب وأتحقق من القناة الرسمية</button>
+</div>
+<div id="train-feedback" class="training-feedback" aria-live="polite" hidden><h3 id="train-verdict"></h3><p id="train-detail"></p></div>
+<div class="controls"><button type="button" class="btn primary" id="train-next" hidden>تابع</button></div>
+</div>
+<div class="training-end" id="train-end" hidden>
+<h3 tabindex="-1" id="train-result-title">نتيجتك في التدريب</h3>
+<div class="bench"><dl><div><dt>قبل الشرح</dt><dd id="train-before"></dd></div><div><dt>بعد الشرح: الطلب المشبوه</dt><dd id="train-after"></dd></div><div><dt>بعد الشرح: الطلب المتوقع</dt><dd id="train-legitimate"></dd></div></dl></div>
+<p class="foot-note">النتيجة تعرض قرارك قبل الشرح ثم قرارك في حالتين جديدتين.</p>
+<div class="controls"><button type="button" class="btn primary" id="train-reset">أعد التدريب</button><button type="button" class="btn secondary" id="train-report">جرّب الإبلاغ عن عملية</button></div>
+</div>
+</section>
+<section class="panel story-panel" id="story" aria-labelledby="story-title" hidden>
+<div class="aw-head"><div><h2 id="story-title" tabindex="-1">كيف بدأت الخدعة؟</h2><p class="sub">شوف كيف ترتبط الرسائل ببعض، ووين كانت أول لحظة تستدعي التوقف.</p></div><button type="button" class="btn secondary" id="story-close">إغلاق</button></div>
+<form id="story-form">
+<label for="story-input">الرسائل بالترتيب، كل رسالة في سطر</label>
+<textarea id="story-input" maxlength="3000" required placeholder="ابدأ بإخفاء أسماء وأرقام الحسابات والرموز"></textarea>
+<p class="scan-help">اكتب «إشعار:» قبل طلب الموافقة عشان نقدر نقارنه بالرسائل السابقة. الفحص داخل الصفحة.</p>
+<p class="field-error" id="story-error" role="alert" hidden></p>
+<div class="controls"><button type="submit" class="btn primary">حلّل التسلسل</button><button type="button" class="btn secondary" id="story-example">جرّب محادثة</button><button type="reset" class="btn secondary">امسح النص</button></div>
+</form>
+<div id="story-result" class="story-result" hidden>
+<h3 id="story-result-title" tabindex="-1"></h3><p id="story-detail"></p>
+<ol class="story-list" id="story-list" aria-label="تسلسل الرسائل"></ol>
+<div class="controls"><button type="button" id="story-guide" class="btn secondary" hidden>شوف الحالة في دليل التوعية</button><button type="button" class="btn primary" id="story-report" hidden>افتح بلاغًا تجريبيًا</button></div>
+</div>
+</section>
+<section class="panel scan-panel" id="scanner" aria-labelledby="scan-title" hidden>
+<div class="aw-head"><div><h2 id="scan-title" tabindex="-1">افحص الرسالة</h2><p class="sub">اعرف وش يثير الاشتباه وقارن كلام المرسل بطلب الموافقة.</p></div><button type="button" class="btn secondary" id="scan-close">إغلاق</button></div>
+<form id="scan-form">
+<div class="scan-form-grid">
+<div><label for="scan-message">الرسالة أو كلام المتصل</label><textarea id="scan-message" maxlength="1500" required placeholder="ألصق النص بعد إخفاء بياناتك"></textarea></div>
+<div><label for="scan-notice">نص إشعار الموافقة، إن وجد</label><textarea id="scan-notice" maxlength="600" placeholder="ألصق نص الطلب بدون رمز التحقق"></textarea></div>
+<div class="scan-span"><label for="scan-stage">وش صار معك؟</label><select id="scan-stage"><option value="before">وصلتني الرسالة فقط</option><option value="after">شاركت بيانات أو وافقت</option><option value="paid">انخصم مبلغ أو حوّلت</option></select></div>
+</div>
+<p class="scan-help">الفحص يتم داخل الصفحة. احذف اسمك وأرقام بطاقتك وأي رمز تحقق قبل اللصق.</p>
+<div class="controls"><button type="submit" class="btn primary">افحص النص</button><button type="button" class="btn secondary" id="scan-sample">جرّب مثالًا</button><button type="reset" class="btn secondary">امسح النص</button></div>
+</form>
+<div id="scan-result" class="scan-result" hidden>
+<h3 id="scan-result-title" tabindex="-1"></h3><p id="scan-notice-type" class="scan-help" hidden></p>
+<div id="scan-evidence"></div>
+<div class="aw-alert"><strong>خطوتك التالية</strong><p id="scan-next"></p></div>
+<div class="controls"><button type="button" id="scan-guide" class="btn secondary" hidden>شوف الحالة في دليل التوعية</button><button type="button" id="scan-report" class="btn primary" hidden>افتح بلاغًا تجريبيًا</button></div>
+</div>
+</section>
+<section class="panel awareness" id="awareness" aria-labelledby="aw-title" hidden>
+<div class="aw-head"><div><h2 id="aw-title" tabindex="-1">التنبيهات والتوعية</h2><p class="sub">ابحث عن موقف أو اختره من القائمة، ثم قل وش صار عشان تشوف الخطوة المناسبة.</p></div><button type="button" class="btn secondary" id="aw-close">إغلاق</button></div>
+<div class="aw-tools"><div><label for="aw-search">ابحث عن موقف</label><input id="aw-search" type="search" placeholder="مثل رمز التحقق أو عربون"></div><div><label for="aw-filter">نوع الاحتيال</label><select id="aw-filter"><option value="">جميع الأنواع</option></select></div></div>
+<article id="aw-detail" class="aw-detail" aria-labelledby="aw-detail-title" hidden>
+<h3 id="aw-detail-title" tabindex="-1"></h3><p id="aw-example"></p>
+<p class="label">إشارات تنتبه لها</p><ul id="aw-signals"></ul>
+<div class="aw-section"><label for="aw-stage">وش صار معك؟</label><select id="aw-stage"></select></div>
+<div class="aw-section" id="aw-kind" hidden><label for="aw-approval">وش الإجراء اللي كان مكتوب في التنبيه؟</label><select id="aw-approval"><option value="">اختر بدون إدخال الرمز أو بياناتك</option><option value="wallet">إضافة بطاقة لمحفظة رقمية</option><option value="transfer">حوالة أو إضافة مستفيد</option><option value="purchase">مو واضح لي</option></select></div>
+<div class="aw-alert" aria-live="polite"><strong id="aw-alert-title"></strong><p id="aw-next"></p></div>
+<div class="controls"><button type="button" class="btn primary" id="aw-report" hidden>جرّب البلاغ</button><button type="button" class="btn secondary" id="aw-train">جرّب تدريب «قبل ما توافق»</button></div>
+<a class="aw-source" id="aw-source" target="_blank" rel="noopener noreferrer"></a>
+</article>
+<p class="aw-count" id="aw-count" aria-live="polite"></p>
+<div class="aw-grid" id="aw-cards"></div>
+</section>
+<div class="layout">
+<section class="panel" aria-label="تجربة البلاغ">
+<ol class="steps" aria-label="مراحل التجربة"><li aria-current="step">الإشعار</li><li>مراجعة البلاغ</li><li>الإجراء</li></ol>
+<section id="notification">
+<h2 tabindex="-1">إشعار عملية بطاقة</h2>
+<p class="sub">اختر حالة تدريبية وابدأ التجربة.</p>
+<div class="trial-grid"><div><label for="scenario">الحالة التدريبية</label>
+<select id="scenario">
+<option value="purchase">شراء لم أقم به</option>
+<option value="transfer">حوالة لم أرسلها</option>
+<option value="wallet">بطاقة أضيفت لمحفظة غريبة</option>
+<option value="missing">إشعار بدون اسم التاجر</option>
+<option value="recognized">شراء أعرفه</option>
+<option value="custom">اكتب إشعارًا تدريبيًا</option>
+</select></div><div><label for="mode">طريقة التجربة</label>
+<select id="mode"><option value="guided">مع مساعد «مو أنا»</option><option value="manual">إعداد البلاغ يدويًا</option></select></div></div>
+<div id="custom-box" class="notice" hidden><label for="custom">اكتب نصًا وهميًا بدون بيانات شخصية</label><textarea id="custom" maxlength="350" placeholder="مثال: تم خصم ٢٥٠ ريال لدى متجر الحي الساعة ١٣:٠٥"></textarea></div>
+<div class="notice"><span class="label">نص الإشعار</span><p id="message"></p></div>
+<div class="controls"><button type="button" id="report" class="btn primary">العملية مو مني</button><button type="button" id="recognize" class="btn secondary">أعرف العملية</button></div>
+</section>
+<section id="review" hidden>
+<h2 tabindex="-1">راجع البلاغ قبل المتابعة</h2>
+<p class="sub" id="review-help"></p>
+<div class="notice"><span class="label">نص الإشعار</span><p id="review-message"></p><p class="classification" id="classification" hidden></p></div>
+<form id="report-form">
+<div class="input-grid">
+<div><label for="amount">المبلغ بالريال</label><input id="amount" type="text" inputmode="decimal" maxlength="15" placeholder="غير مذكور"></div>
+<div><label for="time">وقت العملية</label><input id="time" type="text" maxlength="12" placeholder="غير مذكور"></div>
+<div class="full"><label for="merchant">اسم التاجر</label><input id="merchant" type="text" maxlength="80" placeholder="غير مذكور"></div>
+</div>
+<p id="error" class="field-error" role="alert" hidden>أدخل المبلغ بالأرقام أو اتركه فارغًا إذا ما تعرفه.</p>
+<div class="controls"><button class="btn primary" type="submit">اعتمد تفاصيل البلاغ</button><button class="btn secondary" type="button" id="back">ارجع للإشعار</button></div>
+</form>
+</section>
+<section id="action" hidden>
+<h2 tabindex="-1">اختر الإجراء</h2>
+<p class="sub" id="action-help"></p>
+<div class="notice"><span class="label">ملخص البلاغ</span><p id="summary"></p></div>
+<div class="controls" id="action-controls"><button type="button" class="btn primary" id="freeze">حاكِ إيقاف البطاقة</button><button type="button" class="btn secondary" id="call">حاكِ الاتصال بالبنك</button></div>
+</section>
+<section id="voice" hidden>
+<h2 tabindex="-1">محاكاة المكالمة</h2>
+<p class="sub">اسمع كيف يبدأ المساعد البلاغ. البيانات تُقرأ على جهازك في تجربة العرض.</p>
+<div class="notice"><span class="label">كلام المساعد</span><p class="voice-line" id="voice-line"></p></div>
+<p id="voice-status" class="voice-status" aria-live="polite"></p>
+<div class="controls"><button type="button" id="speak" class="btn secondary">اسمع البلاغ</button><button type="button" id="handoff" class="btn primary">استلم المكالمة للتحقق</button></div>
+</section>
+<section id="result" hidden>
+<h2 tabindex="-1">نتيجة التجربة</h2>
+<div class="result"><strong id="result-title"></strong><p id="result-body"></p></div>
+<div class="controls" id="submit-controls" hidden><button type="button" id="submit-case" class="btn primary">أرسل البلاغ للبنك التجريبي</button></div>
+<div class="tracking" id="tracking" hidden aria-live="polite">
+<p>رقم البلاغ <bdi dir="ltr" class="case-reference" id="tracking-id"></bdi></p>
+<p>الحالة <strong id="tracking-state"></strong></p>
+<p id="tracking-outcome" hidden></p>
+<ol id="tracking-history" class="event-list" aria-label="تسلسل البلاغ"></ol>
+</div>
+</section>
+<p class="foot-note" id="simulation-note">البيانات وهمية. الاتصال والإيقاف والإغلاق إجراءات محاكاة. البلاغات والنتائج تبقى في الجلسة الحالية.</p>
+</section>
+<aside class="panel" aria-label="متابعة التجربة">
+<h2 class="aside-title">سجل التجربة</h2>
+<ol class="event-list" id="events" aria-live="polite" aria-relevant="additions"></ol>
+<div class="metric"><span>الوقت لاختيار الإجراء</span><strong id="elapsed">—</strong></div>
+<section class="bench" aria-label="مقارنة طرق الإبلاغ"><h3>آخر تجربة للحالة نفسها</h3><dl>
+<div><dt>يدويًا</dt><dd id="manual-time">—</dd></div>
+<div><dt>مع المساعد</dt><dd id="guided-time">—</dd></div>
+</dl></section>
+<details class="bench" id="pilot">
+<summary>نتائج اختبار الهاكثون</summary>
+<dl><div><dt>المحاولات المكتملة</dt><dd id="pilot-count">٠</dd></div>
+<div><dt>وسيط الوقت يدويًا</dt><dd id="pilot-manual">—</dd></div>
+<div><dt>وسيط الوقت مع المساعد</dt><dd id="pilot-guided">—</dd></div>
+<div><dt>اختاروا إجراء السيناريو المتوقع</dt><dd id="pilot-accuracy">—</dd></div></dl>
+<button type="button" class="btn secondary" id="export" disabled>نزّل نتائج CSV</button>
+</details>
+<div class="controls"><button type="button" class="btn secondary" id="reset">ابدأ من جديد</button></div>
+</aside>
+</div>
+<section class="panel bank-panel" id="bank-panel" aria-labelledby="bank-title" hidden>
+<div class="bank-head"><div><h2 id="bank-title" tabindex="-1">لوحة البنك التجريبي</h2><p class="sub">بدّل لدور موظف البنك واستلم بلاغ العميل.</p></div><button type="button" class="btn secondary" id="back-to-customer">العودة إلى العميل</button></div>
+<p id="bank-empty">ما وصل أي بلاغ في هذه الجلسة.</p>
+<div id="bank-queue" hidden>
+<label for="case-select">البلاغ</label><select id="case-select"></select>
+<div class="bank-case">
+<p class="label">البيانات التي اعتمدها العميل</p>
+<p id="bank-summary"></p>
+<p id="bank-action"></p>
+<p><strong id="bank-state" aria-live="polite"></strong></p>
+<div class="controls" id="bank-actions"><button type="button" id="bank-accept" class="btn primary">استلم البلاغ للمراجعة</button></div>
+<div id="bank-close-controls" hidden><label for="bank-outcome">نتيجة المراجعة التجريبية</label>
+<select id="bank-outcome"><option value="complete">تمت المراجعة</option><option value="duplicate">أُغلق كبلاغ مكرر</option></select>
+<div class="controls"><button type="button" class="btn primary" id="bank-close">أغلق البلاغ التجريبي</button></div></div>
+<p id="bank-outcome-result" hidden></p>
+<ol id="bank-history" class="event-list" aria-label="تسلسل البلاغ"></ol>
+</div>
+</div>
+</section>
+</main>
+<script>
+const demoMessages = {
+  purchase: 'عملية شراء بـ ٨٥٠٫٠٠ ر.س لدى متجر المدى الرقمي الساعة ١٤:٢٦.',
+  transfer: 'تم إرسال حوالة بمبلغ ٣٢٠٠ ريال إلى مستفيد جديد، الوقت ١١:٤٠.',
+  wallet: 'تمت إضافة بطاقتك إلى محفظة رقمية على جهاز جديد الساعة ٢٠:١٠.',
+  missing: 'تم خصم SAR 125.50 من بطاقتك، الوقت 09:05.',
+  recognized: 'عملية شراء بمبلغ ٤٢ ريال لدى مقهى الحي الساعة ٠٧:٥٠.'
+};
+
+function latinDigits(text) {
+  return text.replace(/[٠-٩۰-۹]/g, digit => String(digit.codePointAt(0) & 15));
+}
+
+function parseNotification(message) {
+  const number = '[0-9]+(?:[.٫][0-9]{1,2})?';
+  const currency = '(?:ر\\.س|ريال|SAR)';
+  const amountPattern = new RegExp(`(${number})\\s*${currency}|${currency}\\s*(${number})`, 'i');
+  const text = latinDigits(message);
+  const amount = text.match(amountPattern);
+  const time = text.match(/(?:الساعة|الوقت)\s*([0-9]{1,2}:[0-9]{2})/);
+  const merchant = message.match(/لدى\s+(.+?)(?=\s+الساعة|\s+الوقت|[.،]|$)/);
+  return {
+    amount: (amount?.[1] || amount?.[2] || '').replace('٫', '.'),
+    time: time?.[1] || '',
+    merchant: merchant?.[1]?.trim() || ''
+  };
+}
+
+const byId = id => document.getElementById(id);
+const sections = ['notification', 'review', 'action', 'voice', 'result'];
+const steps = Array.from(document.querySelectorAll('.steps li'));
+const formatNumber = new Intl.NumberFormat('ar-SA', { maximumFractionDigits: 2 });
+let startedAt;
+let activeText = '';
+let activeDetails;
+let selectedAction = '';
+let activeCaseId = '';
+const bankCases = new Map();
+const trialTimes = new Map();
+const pilotRuns = [];
+const outcomes = {complete:'تمت المراجعة', duplicate:'أُغلق كبلاغ مكرر'};
+const expectedAction = {purchase:'freeze', missing:'freeze', recognized:'recognize', transfer:'call', wallet:'call'};
+
+const trainingExamples = {
+  card: [
+    'خصم من بطاقتك لدى متجر', 'عملية شراء بالبطاقة', 'دفع مبلغ لدى مقهى',
+    'تم خصم مبلغ لدى التاجر', 'عملية دفع بنقاط البيع', 'شراء إلكتروني ببطاقتك',
+    'سحب نقدي من صراف'
+  ],
+  transfer: [
+    'تم إرسال حوالة إلى مستفيد', 'تحويل بنكي إلى حساب آخر', 'حوالة صادرة للمستفيد',
+    'تم تحويل مبلغ عبر سريع', 'حوالة واردة إلى حسابك', 'تمت إضافة مستفيد جديد'
+  ],
+  wallet: [
+    'تم إضافة بطاقتك إلى محفظة رقمية على جهاز', 'تم ربط البطاقة بمحفظة الجوال',
+    'تفعيل البطاقة في محفظة رقمية', 'إشعار تفعيل المحفظة الرقمية',
+    'تمت إضافة البطاقة إلى محفظة على هاتف', 'إضافة بطاقتك في محفظة جهاز جديد'
+  ]
+};
+const typeLabels = {card:'عملية بطاقة', transfer:'حوالة أو إجراء مستفيد', wallet:'إضافة بطاقة لمحفظة رقمية'};
+function tokenize(value) {
+  return value.replace(/[أإآ]/g, 'ا').replace(/[ىي]/g, 'ي').replace(/[ةه]/g, 'ه')
+    .match(/[\u0621-\u063a\u0641-\u064a]+/g) || [];
+}
+
+function trainClassifier(examples) {
+  const vocabulary = new Set();
+  const groups = Object.entries(examples).map(([type, rows]) => {
+    const counts = new Map();
+    let total = 0;
+    for (const word of rows.flatMap(tokenize)) {
+      vocabulary.add(word);
+      counts.set(word, (counts.get(word) || 0) + 1);
+      total++;
+    }
+    return {type, counts, total};
+  });
+  return function classify(message) {
+    const words = [...new Set(tokenize(message).filter(word => vocabulary.has(word)))];
+    if (words.length < 2) return '';
+    const scores = groups.map(({type, counts, total}) => ({
+      type, score: words.reduce((sum, word) => sum + Math.log(((counts.get(word) || 0) + 1) / (total + vocabulary.size)), 0)
+    })).sort((a, b) => b.score - a.score);
+    return scores[0].score - scores[1].score > Math.log(2) ? scores[0].type : '';
+  };
+}
+
+const classify = trainClassifier(trainingExamples);
+function currentNotice() {
+  return byId('scenario').value === 'custom' ? byId('custom').value.trim() : demoMessages[byId('scenario').value];
+}
+
+function formatSeconds(seconds) {
+  return formatNumber.format(seconds) + ' ثانية';
+}
+
+function renderBench() {
+  const times = trialTimes.get(currentNotice());
+  for (const mode of ['manual', 'guided']) {
+    byId(mode + '-time').textContent = times?.[mode] == null ? '—' : formatSeconds(times[mode]);
+  }
+}
+
+function stopVoice() {
+  if ('speechSynthesis' in globalThis) speechSynthesis.cancel();
+}
+
+
+function show(section, stage, focus = true) {
+  for (const id of sections) byId(id).hidden = id !== section;
+  steps.forEach((step, index) => {
+    if (index === stage) step.setAttribute('aria-current', 'step');
+    else step.removeAttribute('aria-current');
+    step.classList.toggle('done', index < stage);
+  });
+  if (focus) byId(section).querySelector('h2').focus();
+}
+
+function addEvent(message) {
+  const entry = document.createElement('li');
+  entry.textContent = message;
+  byId('events').append(entry);
+}
+
+function restart(focus = true) {
+  stopVoice();
+  selectedAction = '';
+  activeCaseId = '';
+  renderTracking();
+  byId('custom-box').hidden = byId('scenario').value !== 'custom';
+  byId('message').textContent = currentNotice() || 'اكتب إشعارًا للبدء.';
+  byId('report').disabled = !currentNotice();
+  byId('recognize').disabled = !currentNotice();
+  renderBench();
+  byId('events').replaceChildren();
+  byId('elapsed').textContent = '—';
+  byId('error').hidden = true;
+  addEvent('ظهر إشعار العملية التجريبي');
+  startedAt = performance.now();
+  show('notification', 0, focus);
+}
+
+function finish(title, detail, event, stage = 2) {
+  stopVoice();
+  byId('submit-controls').hidden = !selectedAction;
+  renderTracking();
+  byId('result-title').textContent = title;
+  byId('result-body').textContent = detail;
+  addEvent(event);
+  show('result', stage);
+}
+
+function recordAction(action) {
+  const seconds = (performance.now() - startedAt) / 1000;
+  const scenario = byId('scenario').value;
+  const mode = byId('mode').value;
+  pilotRuns.push({scenario, mode, action, seconds, correct: expectedAction[scenario] ? action === expectedAction[scenario] : null});
+  const times = trialTimes.get(currentNotice()) || {};
+  times[byId('mode').value] = seconds;
+  trialTimes.set(currentNotice(), times);
+  byId('elapsed').textContent = formatSeconds(seconds);
+  renderBench();
+  renderPilot();
+}
+
+function renderPilot() {
+  byId('pilot-count').textContent = formatNumber.format(pilotRuns.length);
+  for (const mode of ['manual', 'guided']) {
+    const values = pilotRuns.filter(run => run.mode === mode).map(run => run.seconds).sort((a,b) => a-b);
+    const middle = Math.floor(values.length / 2);
+    const median = values.length % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
+    byId('pilot-' + mode).textContent = values.length ? formatSeconds(median) : '—';
+  }
+  const scored = pilotRuns.filter(run => run.correct !== null);
+  const correct = scored.filter(run => run.correct).length;
+  byId('pilot-accuracy').textContent = scored.length ? formatNumber.format(correct) + ' من ' + formatNumber.format(scored.length) : '—';
+  byId('export').disabled = !pilotRuns.length;
+}
+
+byId('export').addEventListener('click', () => {
+  const csv = [
+    'scenario,mode,action,seconds,expected_action_selected',
+    ...pilotRuns.map(run => [run.scenario, run.mode, run.action, run.seconds.toFixed(2), run.correct ?? ''].join(','))
+  ].join('\r\n');
+  const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'mo-ana-pilot.csv';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
+byId('scenario').addEventListener('change', () => restart(false));
+byId('mode').addEventListener('change', () => restart(false));
+byId('custom').addEventListener('input', () => restart(false));
+byId('reset').addEventListener('click', () => restart());
+byId('back').addEventListener('click', () => {
+  byId('error').hidden = true;
+  show('notification', 0);
+});
+byId('report').addEventListener('click', () => {
+  activeText = currentNotice();
+  if (!activeText) return;
+  const guided = byId('mode').value === 'guided';
+  const details = guided ? parseNotification(activeText) : {amount:'', time:'', merchant:''};
+  const suggested = guided ? classify(activeText) : '';
+  byId('review-message').textContent = activeText;
+  byId('review-help').textContent = guided ? 'راجع البيانات المستخرجة وصحّحها عند الحاجة.' : 'اقرأ الإشعار وعبّئ بيانات البلاغ يدويًا.';
+  byId('classification').hidden = !guided;
+  const selectedScenario = byId('scenario').value;
+  const callScenario = selectedScenario === 'transfer' || selectedScenario === 'wallet' || suggested === 'transfer' || suggested === 'wallet';
+  const cardAction = !guided || !callScenario;
+  byId('freeze').hidden = !cardAction;
+  byId('action-help').textContent = cardAction
+    ? 'تفاصيل البلاغ جاهزة. جرّب الإيقاف أو الاتصال في المحاكاة.'
+    : 'تفاصيل البلاغ جاهزة. جرّب الاتصال بالبنك واذكر نوع العملية المشبوهة.';
+  byId('classification').textContent = suggested
+    ? 'نوع الإشعار المقترح: ' + typeLabels[suggested]
+    : 'نوع الإشعار غير واضح. راجع النص قبل الاعتماد.';
+  for (const [field, value] of Object.entries(details)) byId(field).value = value;
+  addEvent('بدأت مراجعة البلاغ');
+  show('review', 1);
+});
+byId('recognize').addEventListener('click', () => {
+  recordAction('recognize');
+  finish('تم إنهاء التجربة', 'أشرت إلى أنك تعرف العملية. تقدر تبدأ تجربة جديدة بحالة مختلفة.', 'أكّد المستخدم أنه يعرف العملية', 0);
+});
+byId('report-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const amount = latinDigits(byId('amount').value.trim()).replace(/[٫,]/g, '.');
+  const time = byId('time').value.trim();
+  const merchant = byId('merchant').value.trim();
+  const valid = !amount || /^\d+(?:\.\d{1,2})?$/.test(amount);
+  byId('error').hidden = valid;
+  if (!valid) {
+    byId('amount').focus();
+    return;
+  }
+  const formattedAmount = amount ? formatNumber.format(Number(amount)) + ' ريال' : 'غير مذكور';
+  activeDetails = {amount:formattedAmount, time, merchant};
+  byId('summary').textContent = `المبلغ: ${formattedAmount} | الوقت: ${time || 'غير مذكور'} | التاجر: ${merchant || 'غير مذكور'}`;
+  addEvent('اعتمد المستخدم تفاصيل البلاغ');
+  show('action', 2);
+});
+byId('freeze').addEventListener('click', () => {
+  recordAction('freeze');
+  selectedAction = 'محاكاة إيقاف البطاقة';
+  finish('تمت محاكاة إيقاف البطاقة', 'تفاصيل البلاغ جاهزة في التجربة. يقدر العميل في التطبيق المصرفي الفعلي يكمل البلاغ عبر قنوات البنك الرسمية.', 'اختار المستخدم محاكاة الإيقاف');
+});
+byId('call').addEventListener('click', () => {
+  recordAction('call');
+  const {amount, time, merchant} = activeDetails;
+  const facts = [amount !== 'غير مذكور' && 'بمبلغ ' + amount, merchant && 'لدى ' + merchant, time && 'الساعة ' + time].filter(Boolean).join('، ');
+  byId('voice-line').textContent = 'مرحبًا، معكم مساعد مو أنا. وافق العميل على بدء بلاغ عن عملية لا يتعرف عليها' + (facts ? '، ' + facts : '') + '. سأترك العميل يكمل التحقق من هويته.';
+  byId('voice-status').textContent = 'اضغط الاستماع لتشغيل الصوت، أو استلم المكالمة مباشرة.';
+  addEvent('بدأت محاكاة الاتصال');
+  show('voice', 2);
+});
+byId('speak').addEventListener('click', () => {
+  if (!('speechSynthesis' in globalThis) || !('SpeechSynthesisUtterance' in globalThis)) {
+    byId('voice-status').textContent = 'الصوت غير متاح على هذا الجهاز. تقدر تقرأ نص البلاغ.';
+    return;
+  }
+  stopVoice();
+  const speech = new SpeechSynthesisUtterance(byId('voice-line').textContent);
+  speech.lang = 'ar-SA';
+  const voices = speechSynthesis.getVoices();
+  const arabicVoice = voices.find(voice => voice.localService && voice.lang.toLowerCase().startsWith('ar'));
+  if (!arabicVoice) {
+    byId('voice-status').textContent = 'الصوت العربي المحلي غير متاح حاليًا. تقدر تقرأ نص البلاغ وتكمل.';
+    return;
+  }
+  speech.voice = arabicVoice;
+  speech.onerror = () => {
+    byId('voice-status').textContent = 'تعذّر تشغيل الصوت. تقدر تقرأ نص البلاغ وتكمل.';
+  };
+  speech.onend = () => {
+    byId('voice-status').textContent = 'انتهى البلاغ الصوتي. استلم المكالمة للمتابعة.';
+  };
+  byId('voice-status').textContent = 'جاري تشغيل البلاغ الصوتي…';
+  speechSynthesis.speak(speech);
+});
+byId('handoff').addEventListener('click', () => {
+  selectedAction = 'محاكاة الاتصال بالبنك';
+  finish('استلم العميل المكالمة التجريبية', 'في هذا العرض ينتهي دور المساعد عند خطوة التحقق من الهوية.', 'استلم المستخدم المكالمة في المحاكاة');
+});
+function renderHistory(id, report) {
+  const list = byId(id);
+  list.replaceChildren();
+  for (const event of report.history) {
+    const item = document.createElement('li');
+    item.textContent = event;
+    list.append(item);
+  }
+}
+
+function renderTracking() {
+  const report = bankCases.get(activeCaseId);
+  byId('tracking').hidden = !report;
+  if (!report) return;
+  byId('tracking-id').textContent = report.id;
+  byId('tracking-state').textContent = report.status;
+  byId('tracking-outcome').hidden = !report.outcome;
+  byId('tracking-outcome').textContent = report.outcome;
+  renderHistory('tracking-history', report);
+}
+
+function renderBank() {
+  byId('bank-empty').hidden = bankCases.size > 0;
+  byId('bank-queue').hidden = bankCases.size === 0;
+  const report = bankCases.get(byId('case-select').value);
+  if (!report) return;
+  byId('bank-summary').textContent = report.summary;
+  byId('bank-action').textContent = 'الإجراء الذي اختاره العميل: ' + report.action;
+  byId('bank-state').textContent = report.status;
+  byId('bank-actions').hidden = report.status !== 'بانتظار المراجعة';
+  byId('bank-close-controls').hidden = report.status !== 'قيد المراجعة';
+  byId('bank-outcome-result').hidden = !report.outcome;
+  byId('bank-outcome-result').textContent = report.outcome;
+  renderHistory('bank-history', report);
+}
+
+function setBankPanel(open) {
+  byId('bank-panel').hidden = !open;
+  byId('bank-toggle').setAttribute('aria-expanded', String(open));
+  if (open) {
+    renderBank();
+    byId('bank-title').focus();
+  } else {
+    const target = byId('result').hidden ? byId('bank-toggle') : byId('result').querySelector('h2');
+    target.focus();
+  }
+}
+
+byId('submit-case').addEventListener('click', () => {
+  if (!selectedAction || activeCaseId) return;
+  const id = 'MA-' + String(bankCases.size + 1).padStart(4, '0');
+  bankCases.set(id, {
+    id, summary:byId('summary').textContent, action:selectedAction, status:'بانتظار المراجعة',
+    outcome:'', history:['العميل اعتمد البلاغ وأرسله']
+  });
+  activeCaseId = id;
+  const option = document.createElement('option');
+  option.textContent = id;
+  option.value = id;
+  byId('case-select').append(option);
+  byId('case-select').value = id;
+  byId('submit-controls').hidden = true;
+  addEvent('أُرسل البلاغ إلى البنك التجريبي');
+  renderTracking();
+  renderBank();
+});
+byId('bank-toggle').addEventListener('click', () => setBankPanel(byId('bank-panel').hidden));
+byId('back-to-customer').addEventListener('click', () => setBankPanel(false));
+byId('case-select').addEventListener('change', renderBank);
+byId('bank-accept').addEventListener('click', () => {
+  const report = bankCases.get(byId('case-select').value);
+  if (!report || report.status !== 'بانتظار المراجعة') return;
+  report.status = 'قيد المراجعة';
+  report.history.push('الموظف استلم البلاغ للمراجعة');
+  if (report.id === activeCaseId) addEvent('استلم البنك التجريبي البلاغ للمراجعة');
+  renderBank();
+  renderTracking();
+});
+byId('bank-close').addEventListener('click', () => {
+  const report = bankCases.get(byId('case-select').value);
+  const outcome = outcomes[byId('bank-outcome').value];
+  if (!report || report.status !== 'قيد المراجعة' || !outcome) return;
+  report.status = 'مغلق';
+  report.outcome = outcome;
+  report.history.push('الموظف أغلق البلاغ التجريبي');
+  if (report.id === activeCaseId) addEvent('أُغلق البلاغ في البنك التجريبي');
+  renderBank();
+  renderTracking();
+});
+
+const trainingScenarios = [
+  {
+    phase:'قبل الشرح', title:'يقول إنه يراجع تنبيهًا على بطاقتك',
+    caller:'أنا من البنك. وصلك طلب للتأكد من بطاقة مدى، وافق عليه عشان نكمل المراجعة.',
+    notice:'تأكيد عملية شراء بالبطاقة لدى متجر بمبلغ ٣١٩ ريال.',
+    claim:'مراجعة تنبيه على البطاقة', approval:'تنفيذ عملية شراء'
+  },
+  {
+    phase:'حالة التدريب', title:'يقول إن الموافقة تلغي العملية',
+    caller:'راح يوصلك إشعار. وافق عليه عشان نلغي العملية.',
+    notice:'تأكيد إضافة بطاقتك إلى محفظة رقمية على جهاز جديد.',
+    claim:'إلغاء عملية', approval:'إضافة البطاقة لمحفظة رقمية'
+  },
+  {
+    phase:'اختبار بعد الشرح', title:'يقول إنه يرجّع لك رسومًا',
+    caller:'فيه رسوم بنرجّعها لك. وافق على الإشعار عشان ينزل المبلغ.',
+    notice:'تأكيد إرسال حوالة بمبلغ ٤٨٠ ريال إلى مستفيد جديد.',
+    claim:'إرجاع رسوم', approval:'إرسال حوالة إلى مستفيد جديد'
+  },
+  {
+    phase:'اختبار بعد الشرح', title:'وصلك طلب موافقة جديد',
+    caller:'أنت طلبت غرضًا بـ ٨٩ ريال من متجر تعرفه. بدأت الدفع بنفسك، ووصل طلب الموافقة مباشرة.',
+    notice:'تأكيد عملية شراء لدى نفس المتجر بمبلغ ٨٩ ريال.',
+    legitimate:true
+  }
+];
+const answerIds = ['train-approve', 'train-ask', 'train-decline'];
+let trainingStage = 0;
+let answers = [];
+const correctTrainingAnswer = scenario => scenario.legitimate ? 'train-approve' : 'train-decline';
+
+function renderTraining(focus = true) {
+  const scenario = trainingScenarios[trainingStage];
+  const finished = !scenario;
+  byId('train-question-box').hidden = finished;
+  byId('train-end').hidden = !finished;
+  if (finished) {
+    byId('train-phase').textContent = 'اكتمل التدريب';
+    const response = index => answers[index] === correctTrainingAnswer(trainingScenarios[index])
+      ? 'اخترت التحقق المناسب' : 'كان فيه تصرف أنسب';
+    byId('train-before').textContent = response(0);
+    byId('train-after').textContent = response(2);
+    byId('train-legitimate').textContent = response(3);
+    byId('train-result-title').focus();
+    return;
+  }
+  byId('train-phase').textContent = scenario.phase;
+  byId('train-title').textContent = scenario.title;
+  byId('train-context-label').textContent = scenario.legitimate ? 'وش صار قبل الإشعار؟' : 'اللي يقوله المتصل';
+  byId('train-caller').textContent = scenario.caller;
+  byId('train-notice').textContent = scenario.notice;
+  byId('train-feedback').hidden = true;
+  byId('train-next').hidden = true;
+  for (const id of answerIds) {
+    byId(id).disabled = false;
+    byId(id).setAttribute('aria-pressed', 'false');
+  }
+  if (focus) byId('train-title').focus();
+}
+
+function setTraining(open) {
+  byId('training').hidden = !open;
+  byId('train-open').setAttribute('aria-expanded', String(open));
+  if (open) byId('training-title').focus();
+  else byId('train-open').focus();
+}
+
+function explainChoice(answer, scenario) {
+  if (scenario.legitimate) {
+    return 'أنت بدأت الدفع، والمتجر والمبلغ متطابقان مع طلبك. راجع التفاصيل في التطبيق اللي بدأت منه قبل المتابعة. إذا اختلفت التفاصيل، وقف وتحقق.';
+  }
+  const detectedType = classify(scenario.notice);
+  const category = detectedType ? 'صنّف المساعد الإشعار ضمن «' + typeLabels[detectedType] + '». ' : '';
+  const advice = answer === 'train-ask'
+    ? 'خذ التوضيح من القناة الرسمية بعد إنهاء المكالمة.'
+    : 'إذا ما بدأت الطلب بنفسك، ارفضه وتحقّق عبر القناة الرسمية.';
+  return category + 'المتصل قال «' + scenario.claim + '»، والإشعار يطلب منك تأكيد «' + scenario.approval + '». ' + advice;
+}
+
+for (const id of answerIds) {
+  byId(id).addEventListener('click', () => {
+    if (answers[trainingStage] || !trainingScenarios[trainingStage]) return;
+    answers[trainingStage] = id;
+    for (const optionId of answerIds) {
+      byId(optionId).disabled = true;
+      byId(optionId).setAttribute('aria-pressed', String(optionId === id));
+    }
+    if (trainingStage > 0) {
+      const scenario = trainingScenarios[trainingStage];
+      const safe = id === correctTrainingAnswer(scenario);
+      byId('train-verdict').textContent = safe ? 'اخترت التحقق المناسب' : 'راجع سياق الإشعار';
+      byId('train-detail').textContent = explainChoice(id, scenario);
+      byId('train-feedback').hidden = false;
+    }
+    byId('train-next').textContent = ['ابدأ حالة التدريب','جرّب حالة جديدة','جرّب إشعارًا ثانيًا','شوف نتيجتك'][trainingStage];
+    byId('train-next').hidden = false;
+    byId('train-next').focus();
+  });
+}
+byId('train-next').addEventListener('click', () => {
+  if (!answers[trainingStage]) return;
+  trainingStage++;
+  renderTraining();
+});
+byId('train-open').addEventListener('click', () => setTraining(byId('training').hidden));
+byId('train-close').addEventListener('click', () => setTraining(false));
+byId('train-reset').addEventListener('click', () => {
+  trainingStage = 0;
+  answers = [];
+  renderTraining();
+});
+byId('train-report').addEventListener('click', () => {
+  setTraining(false);
+  byId('scenario').value = 'wallet';
+  byId('mode').value = 'guided';
+  restart();
+});
+renderTraining(false);
+
+renderPilot();
+restart(false);
+</script>
+<script src="awareness.js"></script>
+<script src="scanner.js"></script>
+<script src="story.js"></script>
+</body>
+</html>
